@@ -668,3 +668,29 @@ func.func @gather_unsigned_dynamic_operand(%a: tensor<?x4xi32>, %i: tensor<2x1xu
   } : (tensor<?x4xi32>, tensor<2x1xui64>) -> tensor<2x4xi32>
   return %r : tensor<2x4xi32>
 }
+
+// -----
+
+// The bound makes s + 1 exact after truncation to i32. The operand's tied
+// extent and the requested broadcast extent therefore agree.
+// CHECK-LABEL: @dynamic_broadcast_bounded_sum
+// CHECK-NOT: arith.select
+// CHECK: linalg.generic
+// CHECK-NOT: arith.select
+// CHECK: return
+func.func @dynamic_broadcast_bounded_sum(%input: tensor<2x4x?x16xf32>, %s: i32) -> tensor<2x4x3x?x16xf32> {
+  %length = util.assume.int %s<umin = 1, umax = 1024> : i32
+  %wide = arith.extsi %length : i32 to i64
+  %one = arith.constant 1 : i64
+  %sum = arith.addi %wide, %one : i64
+  %rows = arith.index_cast %sum : i64 to index
+  %tied = flow.tensor.tie_shape %input : tensor<2x4x?x16xf32>{%rows}
+  %size = arith.trunci %sum : i64 to i32
+  %c2 = arith.constant 2 : i32
+  %c3 = arith.constant 3 : i32
+  %c4 = arith.constant 4 : i32
+  %c16 = arith.constant 16 : i32
+  %shape = tensor.from_elements %c2, %c4, %c3, %size, %c16 : tensor<5xi32>
+  %r = stablehlo.dynamic_broadcast_in_dim %tied, %shape, dims = [0, 1, 3, 4] : (tensor<2x4x?x16xf32>, tensor<5xi32>) -> tensor<2x4x3x?x16xf32>
+  return %r : tensor<2x4x3x?x16xf32>
+}
