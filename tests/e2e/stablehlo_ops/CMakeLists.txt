@@ -83,6 +83,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "llvm-cpu"
@@ -163,6 +164,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "llvm-cpu"
@@ -241,6 +243,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "vmvx"
@@ -315,6 +318,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "vulkan-spirv"
@@ -412,6 +416,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "cuda"
@@ -498,6 +503,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "cuda"
@@ -583,6 +589,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "rocm"
@@ -659,6 +666,7 @@ iree_check_single_backend_test_suite(
     "three_fry.mlir"
     "torch_index_select.mlir"
     "transpose.mlir"
+    "unsigned_start_indices.mlir"
     "while.mlir"
   TARGET_BACKEND
     "metal-spirv"
